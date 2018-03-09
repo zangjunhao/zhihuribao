@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         currentId = -1;
         getTransition().add(R.id.rongnafl, new mainfragment(), "Fragment" + currentId).commit();
         isHomepage = true;
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//动画
     }
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,7 +69,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //进入页面自动刷新
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(true);
+                onRefresh();
+            }
+        });
     }
+    private void onRefresh() {if (isHomepage) {
+        mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
+        mainFragment.getLatestArticleList();
+    } else {
+        ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
+        themeFragment.refreshData();
+    }
+    }
+
     public void getHomepage() {
         mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + "-1");
         ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
@@ -122,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (isExit) {
             refreshLayout.setRefreshing(false);
-            net.client.cancelAllRequests(true);
+            net.client.cancelAllRequests(true);//取消请求
             super.onBackPressed();
         } else {
             hint();

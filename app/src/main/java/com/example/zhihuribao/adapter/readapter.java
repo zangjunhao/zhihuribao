@@ -121,15 +121,13 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
    static class ArticleListFooterHolder extends RecyclerView.ViewHolder {
-
         public TextView footerTitle;
-
         public ArticleListFooterHolder(View itemView) {
             super(itemView);
             footerTitle = (TextView) itemView.findViewById(R.id.footerTitle);
         }
     }
-   static   class  mHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+   static  class  mHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView articleTitle;
         public ImageView articleImage;
         public Listener.acitemclick itemClickListener;

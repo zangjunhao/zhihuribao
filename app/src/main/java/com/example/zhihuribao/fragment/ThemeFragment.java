@@ -33,7 +33,7 @@ public  class ThemeFragment extends Basefragment {
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        String title = "切格瓦拉照耀你";
+        String title = "窃格瓦拉照耀你";
         if (bundle != null) {
             id = bundle.getInt("ID", 1);
             title = bundle.getString("Title");
@@ -72,7 +72,6 @@ public  class ThemeFragment extends Basefragment {
     }
     public interface themels {
         void onSuccess(actheme articleTheme);
-
         void onFailure();
     }
         public void refreshData() {

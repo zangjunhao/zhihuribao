@@ -33,6 +33,7 @@ import java.util.List;
  */
 
 public class Menufragment extends Basefragment{
+    MainActivity mainActivity = getRootActivity();
     private ArticleThemeListAdaptr adapter;
     private TextView homePage;
     private ListView themesListView;
@@ -54,12 +55,13 @@ public class Menufragment extends Basefragment{
         for (int i = 0; i < themeList.size(); i++) {
             themeStringList.add(themeList.get(i).getName());
         }
-        adapter = new ArticleThemeListAdaptr();
+        //开始设置点击事件
+        adapter = new ArticleThemeListAdaptr(mActivity,themeStringList);
         themesListView.setAdapter(adapter);
         homePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity mainActivity = getRootActivity();
+               //点击主页回到主页
                 if (!mainActivity.isHomepage) {
                     mainActivity.getHomepage();
                 }
@@ -75,7 +77,7 @@ public class Menufragment extends Basefragment{
                 for (int i = 0; i < othersList.size(); i++) {
                     themeStringList.add(othersList.get(i).getName());
                 }
-                adapter.notifyDataSetChanged();//刷新页面
+                adapter.notifyDataSetChanged();//list的数据刷新
             }
             @Override
             public void onFailure() {
@@ -100,15 +102,19 @@ public class Menufragment extends Basefragment{
     }
 
     public class ArticleThemeListAdaptr extends BaseAdapter {
-        private List<String> theme=new ArrayList<String>();
+        private List<String> themeList;
         private Context context;
+        public ArticleThemeListAdaptr(Context context, List<String> themeList) {
+            this.context = context;
+            this.themeList = themeList;
+        }
         @Override
         public int getCount() {
-            return theme.size();
+            return themeList.size();
         }
         @Override
         public Object getItem(int position) {
-            return theme.get(position);
+            return themeList.get(position);
         }
         @Override
         public long getItemId(int position) {
@@ -120,7 +126,7 @@ public class Menufragment extends Basefragment{
                 qieview = LayoutInflater.from(context).inflate(R.layout.theme_item, viewGroup, false);
             }
             TextView tv_item = (TextView) qieview.findViewById(R.id.tv_item);
-            tv_item.setText(theme.get(position));
+            tv_item.setText(themeList.get(position));
             return qieview;
         }
     }
