@@ -24,8 +24,6 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         this.context = context;
         init();
     }
-    private final int TYPE_TOP = 0;
-    private final int TYPE_ARTICLE = 1;
     private final int TYPE_FOOTER = 2;
     private LayoutInflater inflater;
     private List <story>storyls;
@@ -66,12 +64,12 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override//设置函数获取类型，获取没完成的时候就显示加载，获取到头部和下部文章后进行显示
     public int getItemViewType(int position) {
         if (position == 0) {
-            return TYPE_TOP ;
+            return 0 ;
         }
         if (position + 1 == getItemCount()) {
-            return TYPE_FOOTER;
+            return 2;
         }
-        return TYPE_ARTICLE;
+        return 1;
     }
 
     public void addData(List<story> storiesList) {
@@ -84,9 +82,9 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == TYPE_ARTICLE) {view = inflater.inflate(R.layout.aclistview_item, parent, false);
+        if (viewType == 1) {view = inflater.inflate(R.layout.aclistview_item, parent, false);
             return  new mHolder(view);
-        } else if (viewType == TYPE_FOOTER) {view = inflater.inflate(R.layout.jiazhai, parent, false);
+        } else if (viewType == 2) {view = inflater.inflate(R.layout.jiazhai, parent, false);
             return new ArticleListFooterHolder(view);
         }
         view = inflater.inflate(R.layout.tpac, parent, false);
@@ -95,15 +93,15 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-            case TYPE_ARTICLE :mHolder articleListHolder = (mHolder)holder;
+            case 1 :mHolder articleListHolder = (mHolder)holder;
                 Constant.getImageLoader().displayImage(storyls.get(position - 1).getImages().get(0), articleListHolder.articleImage, Constant.getDisplayImageOptions());
                 articleListHolder.articleTitle.setText(storyls.get(position - 1).getTitle());
                 articleListHolder.setItemClickListener(clickListener);
                 break;
-            case TYPE_FOOTER:
+            case 2:
                 if (slideListener != null && storyls != null && storyls.size() > 0) {slideListener.onSlideToTheBottom();
                 }break;
-           case TYPE_TOP:articleListTopHolder = (ArticleListTopHolder) holder;
+           case 0:articleListTopHolder = (ArticleListTopHolder) holder;
               break;
         }
     }

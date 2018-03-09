@@ -167,5 +167,4 @@ public class MainActivity extends AppCompatActivity {
     public void closeDrawerLayout() {
         this.drawerLayout.closeDrawer(GravityCompat.START);
     }
-
 }
