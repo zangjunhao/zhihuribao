@@ -58,16 +58,6 @@ public class Menufragment extends Basefragment{
         //开始设置点击事件
         adapter = new ArticleThemeListAdaptr(mActivity,themeStringList);
         themesListView.setAdapter(adapter);
-        homePage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               //点击主页回到主页
-                if (!mainActivity.isHomepage) {
-                    mainActivity.getHomepage();
-                }
-                mainActivity.closeDrawerLayout();
-            }
-        });
        Listener.OnLoadThemesListener listener = new Listener.OnLoadThemesListener() {
             @Override
             public void onSuccess(List<xiangxi> othersList) {
@@ -84,20 +74,6 @@ public class Menufragment extends Basefragment{
 
             }
         };
-        themesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int themeId = themeList.get(position).getId();
-                if (themeId != getRootActivity().getCurrentId()) {
-                    String title = themeList.get(position).getName();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("ID", themeId);
-                    bundle.putString("Title", title);
-                    getRootActivity().getThemeFragment(themeId, bundle);
-                }
-                getRootActivity().closeDrawerLayout();
-            }
-        });
         net.getThemes(listener);
     }
 

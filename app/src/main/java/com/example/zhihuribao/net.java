@@ -99,7 +99,8 @@ public class net//完整的asynchttp框架的使用
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Content content = JSON.parseObject(responseString, Content.class);
                 if (content != null && !TextUtils.isEmpty(content.getBody())) {
-                    String css = "<link rel=\"stylesheet\" href=\"file:///android_asset/src.css\" type=\"text/css\">";
+                    //万万没想到还有一手前端知识
+                    String css = "<link rel=\"stylesheet\" href=\"file:///android_assets/src.css\" type=\"text/css\">";
                     String html = "<html><head>" + css + "</head><body>" + content.getBody() + "</body></html>";
                     html = html.replace("<div class=\"img-place-holder\">", "");
                     content.setBody(html);

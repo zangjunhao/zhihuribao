@@ -26,7 +26,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.zhihuribao.fragment.ThemeFragment;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private SwipeRefreshLayout refreshLayout;
@@ -60,13 +59,8 @@ public class MainActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (isHomepage) {
                     mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
                     mainFragment.getLatestArticleList();
-                } else {
-                    ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
-                    themeFragment.refreshData();
-                }
             }
         });
         //进入页面自动刷新
@@ -78,20 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void onRefresh() {if (isHomepage) {
+    private void onRefresh() {
         mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
         mainFragment.getLatestArticleList();
-    } else {
-        ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
-        themeFragment.refreshData();
     }
-    }
-
     public void getHomepage() {
         mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + "-1");
-        ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
         FragmentTransaction transition = getTransition();
-        transition.hide(themeFragment);
         if (mainFragment == null) {
             transition.add(R.id.rongnafl, new mainfragment(), "Fragment" + "-1").commit();
         } else {
@@ -102,30 +89,6 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("接受窃格瓦拉的洗礼吧");
         }
-    }
-    public void getThemeFragment(int id, Bundle bundle) {
-        ThemeFragment toFragment = (ThemeFragment) getFragmentByTag("Fragment" + id);
-        Basefragment nowFragment;
-        if (isHomepage) {
-            nowFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
-        } else {
-            nowFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
-        }
-        FragmentTransaction transition = getTransition();
-        transition.hide(nowFragment);
-        if (toFragment == null) {
-            ThemeFragment themeFragment = new ThemeFragment();
-            themeFragment.setArguments(bundle);
-            transition.add(R.id.rongnafl, themeFragment, "Fragment" + id).commit();
-        } else {
-            transition.show(toFragment).commit();
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle(bundle.getString("Title"));
-            }
-        }
-        currentId = id;
-        isHomepage = false;
-        setRefresh(false);
     }
     @Override
     public void onBackPressed() {
