@@ -30,9 +30,7 @@ import com.example.zhihuribao.fragment.ThemeFragment;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private SwipeRefreshLayout refreshLayout;
-    //文章的发布日期
     private String date;
-    //用来实现再按一次退出程序的效果
     private boolean isExit;
     private int currentId;
     public boolean isHomepage;
@@ -72,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    //获取主页
     public void getHomepage() {
         mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + "-1");
         ThemeFragment themeFragment = (ThemeFragment) getFragmentByTag("Fragment" + currentId);
@@ -90,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("接受窃格瓦拉的洗礼吧");
         }
     }
-    //获取主题Fragment
     public void getThemeFragment(int id, Bundle bundle) {
         ThemeFragment toFragment = (ThemeFragment) getFragmentByTag("Fragment" + id);
         Basefragment nowFragment;
