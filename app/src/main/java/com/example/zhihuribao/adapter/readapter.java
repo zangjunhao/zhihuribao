@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import com.example.zhihuribao.ac_content;
 import com.example.zhihuribao.banner;
 import com.example.zhihuribao.R;
 import com.example.zhihuribao.date.Constant;
@@ -41,10 +43,11 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             @Override
             public void OnItemClickListener(int position) {
                 int id = storyls.get(position - 1).getId();
-                Intent intent = new Intent(context, Context.class);
+                Intent intent = new Intent(context,ac_content.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID", id);
                 intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         };
         loadTopArticleListener = new Listener.actpstoryclick() {
