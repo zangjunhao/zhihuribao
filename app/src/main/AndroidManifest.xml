@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/pipixia1"
         android:label="窃格瓦拉日报"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/pipixia1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
