@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">zhihuribao</string>
+    <string name="title_activity_mainfragment">mainfragment</string>
+    <string name="title_activity_banner">banner</string>
+</resources>
