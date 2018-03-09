@@ -19,6 +19,6 @@ public class Constant {
     }
     //设置网络错误时显示
     public static DisplayImageOptions getDisplayImageOptions() {
-        return new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.qie_bug).showImageForEmptyUri(R.drawable.qie).showImageOnFail(R.drawable.qie_bug).displayer(new FadeInBitmapDisplayer(0)).cacheInMemory(true).cacheOnDisk(true).build();
+        return new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.qie_bug).showImageForEmptyUri(R.drawable.qie_bug).showImageOnFail(R.drawable.qie_bug).displayer(new FadeInBitmapDisplayer(0)).cacheInMemory(true).cacheOnDisk(true).build();
     }
 }
