@@ -17,9 +17,7 @@ public class actheme {
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public void setDescription(String description) {this.description = description;}
     public String getBackground() {
         return background;
     }
@@ -44,17 +42,10 @@ public class actheme {
     public void setImage(String image) {
         this.image = image;
     }
-    public String getImage_source() {
-        return image_source;
-    }
-    public void setImage_source(String image_source) {
-        this.image_source = image_source;
-    }
-
+    public String getImage_source() {return image_source;}
+    public void setImage_source(String image_source) {this.image_source = image_source;}
     public List<story> getStories() {
         return stories;
     }
-    public void setStories(List<story> stories) {
-        this.stories = stories;
-    }
+    public void setStories(List<story> stories) {this.stories = stories;}
 }
