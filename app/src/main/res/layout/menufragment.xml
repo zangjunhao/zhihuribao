@@ -23,7 +23,6 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@drawable/menu_avatar" />
-
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
@@ -46,12 +45,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="27dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="joke"
                 android:text="我的收藏"
-                android:textColor="@android:color/white"
+                android:textColor="#f2eded"
                 android:textSize="19sp" />
 
             <ImageView
@@ -61,12 +58,11 @@
                 android:src="@drawable/shouchang" />
 
             <TextView
+                android:textColor="#f4f3f3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="joke"
                 android:text="离线下载"
-                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
             <ImageView

@@ -29,37 +29,32 @@ import android.view.ViewGroup;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private SwipeRefreshLayout refreshLayout;
-    private String date;
-    private boolean isExit;
-    private int currentId;
+    private int number;
     public boolean isHomepage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        currentId = -1;
-        getTransition().add(R.id.rongnafl, new mainfragment(), "Fragment" + currentId).commit();
+        number = -1;
+        getTransition().add(R.id.rongnafl, new mainfragment(), "Fragment" + number).commit();
         isHomepage = true;
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//动画
     }
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("接受窃格瓦拉的洗礼吧");
-        }
         drawerLayout = (DrawerLayout) findViewById(R.id.layout_drawer);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.sr);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_red_light);
+        refreshLayout.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_orange_light);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                    mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
+                    mainfragment mainFragment = (mainfragment) getfragment("Fragment" + number);
                     mainFragment.getLatestArticleList();
             }
         });
@@ -73,67 +68,57 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void onRefresh() {
-        mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + currentId);
+        mainfragment mainFragment = (mainfragment) getfragment("Fragment" + number);
         mainFragment.getLatestArticleList();
     }
     public void getHomepage() {
-        mainfragment mainFragment = (mainfragment) getFragmentByTag("Fragment" + "-1");
+        mainfragment mainFragment = (mainfragment) getfragment("Fragment" + "-1");
         FragmentTransaction transition = getTransition();
         if (mainFragment == null) {
             transition.add(R.id.rongnafl, new mainfragment(), "Fragment" + "-1").commit();
         } else {
             transition.show(mainFragment).commit();
         }
-        currentId = -1;
+        number = -1;
         isHomepage = true;
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("接受窃格瓦拉的洗礼吧");
         }
     }
+    private boolean isExit;
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawerLayout();
-            return;
-        }
-        if (!isHomepage) {
-            getHomepage();
-            return;
-        }
+        return;}
+        if (!isHomepage) {getHomepage();
+        return;}
         if (isExit) {
-            refreshLayout.setRefreshing(false);
-            net.client.cancelAllRequests(true);//取消请求
-            super.onBackPressed();
+            refreshLayout.setRefreshing(false);net.client.cancelAllRequests(true);//关闭所有请求super.onBackPressed()
         } else {
-            hint();
+            //多设置一次snackbar来提醒
+            Snackbar snackbar = Snackbar.make(refreshLayout, "意思你就楞个走了哦", Snackbar.LENGTH_SHORT);
+            snackbar.setCallback(new Snackbar.Callback() {
+                @Override
+                public void onDismissed(Snackbar snackbar, int event) {
+                    isExit = false;
+                }
+                @Override
+                public void onShown(Snackbar snackbar) {
+                    isExit = true;
+                }
+            }).show();
         }
-    }
-    private void hint() {
-        Snackbar snackbar = Snackbar.make(refreshLayout, "再按一次退出", Snackbar.LENGTH_SHORT);
-        snackbar.getView().setBackgroundColor(Color.parseColor("#0099CC"));
-        snackbar.setCallback(new Snackbar.Callback() {
-            @Override
-            public void onDismissed(Snackbar snackbar, int event) {
-                isExit = false;
-            }
-
-            @Override
-            public void onShown(Snackbar snackbar) {
-                isExit = true;
-            }
-        }).show();
     }
     private FragmentTransaction getTransition() {
         FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
         transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         return transition;
     }
-    public Fragment getFragmentByTag(String tag) {
+    public Fragment getfragment(String tag) {
         return getSupportFragmentManager().findFragmentByTag(tag);
     }
-    public int getCurrentId() {
-        return currentId;
-    }
+    private String date;
     public String getDate() {
         return date;
     }

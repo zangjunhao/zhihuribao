@@ -101,11 +101,8 @@ public class content_adapeter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private class ThemeArticleTopHolder extends RecyclerView.ViewHolder {
-
         public ImageView themeImage;
-
         public TextView themeDescription;
-
         public ThemeArticleTopHolder(View itemView) {
             super(itemView);
             themeImage = (ImageView) itemView.findViewById(R.id.themeImage);

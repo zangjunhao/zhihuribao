@@ -23,7 +23,8 @@ import java.util.List;
 
 public class banner extends FrameLayout {
     private ViewPager viewPager;
-    private BannerPagerAdater adapter;
+    private Listener.OnBannerClickListener bannerclls;
+    private BannerPagerAdater bnadapter;
     private TextView topStoriesTitle;
     private List<ImageView> imageViews;
     private List<tpstory> topStoriesList;
@@ -31,7 +32,6 @@ public class banner extends FrameLayout {
     private Handler handler;
     private Runnable runnable;
     private Context context;
-    private Listener.OnBannerClickListener onBannerClickListener;
     private int currentItem = 0;
     public banner(Context context) {
         this(context, null);
@@ -61,7 +61,7 @@ public class banner extends FrameLayout {
         dotList.add(dot2);
         dotList.add(dot3);
         dotList.add(dot4);
-        onBannerClickListener = new Listener.OnBannerClickListener() {
+        bannerclls = new Listener.OnBannerClickListener() {
             @Override
             public void onClick(int id) {
                 id = topStoriesList.get(id).getId();
@@ -77,37 +77,18 @@ public class banner extends FrameLayout {
             public void run() {
                 viewPager.setCurrentItem(currentItem);
                 currentItem = (currentItem + 1) % imageViews.size();
-                handler.postDelayed(this, 2500);
+                handler.postDelayed(this, 2333);
             }
         };
         reset();
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         addView(view, layoutParams);
     }
-    private void reset() {
-        imageViews = new ArrayList<>();
-        for (int i = 0; i < topStoriesList.size(); i++) {
-            if (i > 4) {
-                break;
-            }
-            ImageView imageView = new ImageView(context);
-            imageView.setImageResource(R.drawable.qie_bug);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Constant.getImageLoader().displayImage(topStoriesList.get(i).getImage(),
-                    imageView, Constant.getDisplayImageOptions());
-            imageViews.add(imageView);
-            dotList.get(i).setVisibility(View.VISIBLE);
-        }
-        adapter = new BannerPagerAdater(imageViews);
-        adapter.setOnBannerClickListener(onBannerClickListener);
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new MyPageChangeListener());
-    }
     public void update(List<tpstory> list) {
         topStoriesList.clear();
         topStoriesList = list;
         reset();
-        adapter.notifyDataSetChanged();
+        bnadapter.notifyDataSetChanged();
         topStoriesTitle.setText(topStoriesList.get(0).getTitle());
     }
     public void startPlay() {
@@ -117,7 +98,7 @@ public class banner extends FrameLayout {
     public void cancelPlay() {
         handler.removeCallbacks(runnable);
     }
-    private class MyPageChangeListener implements ViewPager.OnPageChangeListener {
+    private class pagechange implements ViewPager.OnPageChangeListener {
         private int oldPosition = 0;
         @Override
         public void onPageScrollStateChanged(int arg0) {
@@ -136,6 +117,25 @@ public class banner extends FrameLayout {
             oldPosition = position;
         }
     }
+    private void reset() {
+        imageViews = new ArrayList<>();
+        for (int i = 0; i < topStoriesList.size(); i++) {
+            if (i > 4) {
+                break;
+            }
+            ImageView imageView = new ImageView(context);
+            imageView.setImageResource(R.drawable.qie_bug);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Constant.getImageLoader().displayImage(topStoriesList.get(i).getImage(),
+                    imageView, Constant.getDisplayImageOptions());
+            imageViews.add(imageView);
+            dotList.get(i).setVisibility(View.VISIBLE);
+        }
+        bnadapter = new BannerPagerAdater(imageViews);
+        bnadapter.setOnBannerClickListener(bannerclls);
+        viewPager.setAdapter(bnadapter);
+        viewPager.addOnPageChangeListener(new pagechange());
+    }
     private List<tpstory> getDefaultBannerList() {
         List<tpstory> topStoriesList = new ArrayList<>();
         tpstory topStories = new tpstory();
@@ -147,7 +147,7 @@ public class banner extends FrameLayout {
     }
     public class BannerPagerAdater extends PagerAdapter {
         private List<ImageView> imageViews;
-        private Listener.OnBannerClickListener onBannerClickListener;
+        private Listener.OnBannerClickListener bannerls;
         public BannerPagerAdater(List<ImageView> imageViews) {
             this.imageViews = imageViews;
         }
@@ -162,8 +162,8 @@ public class banner extends FrameLayout {
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onBannerClickListener != null) {
-                        onBannerClickListener.onClick(position);
+                    if (bannerls != null) {
+                        bannerclls.onClick(position);
                     }
                 }
             });
@@ -178,7 +178,7 @@ public class banner extends FrameLayout {
             return arg0 == arg1;
         }
         public void setOnBannerClickListener(Listener.OnBannerClickListener onBannerClickListener) {
-            this.onBannerClickListener = onBannerClickListener;
+            this.bannerls = onBannerClickListener;
         }
     }
 }
