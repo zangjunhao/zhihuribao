@@ -10,7 +10,7 @@ import com.example.zhihuribao.date.xiangxi;
 /**
  * Created by 67698 on 2018/3/2.
  */
-//各部分的监听
+//用到的基本所有监听都写在里面了
 public class Listener {
     public interface acitemclick {
         void OnItemClickListener(int position);
@@ -33,12 +33,6 @@ public class Listener {
     }
     public interface actpstoryclick{
         void onSuccess(List<tpstory> topStoriesList);
-        void onFailure();
-    }
-    public interface OnLoadThemeContentListener {
-
-        void onSuccess(actheme articleTheme);
-
         void onFailure();
     }
     public interface OnLoadThemesListener {

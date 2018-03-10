@@ -34,6 +34,7 @@ public class ac_content extends AppCompatActivity {
     private int id;
     private ImageView hintImage;
     private TextView hintText;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ac_content extends AppCompatActivity {
             status = STATUS.IN_LOAD;
         }
     }
-    private void init() {
+      private void init() {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//使用缓存的数据
         webView.getSettings().setDomStorageEnabled(true);//开启本地储存
@@ -73,7 +74,7 @@ public class ac_content extends AppCompatActivity {
             public void onSuccess(Content content) {
                 CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
                 mCollapsingToolbarLayout.setTitle(content.getBody());
-                webView.loadDataWithBaseURL("file:///android_assets/", content.getBody(), "text/html", "UTF-8", null);
+                webView.loadDataWithBaseURL("x-data://base", content.getBody(), "text/html", "UTF-8", null);
                 ImageView imageView = (ImageView) findViewById(R.id.headImage);
                 Constant.getImageLoader().displayImage(content.getImage(), imageView, Constant.getDisplayImageOptions());
                 stopAnimation(hintImage);

@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/acimage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="84dp"
+            android:layout_height="83dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop" />
 
