@@ -95,12 +95,12 @@ public class net//完整的asynchttp框架的使用
                     listener.onFailure();
                 }
             }
-            @Override//接入数据html和css
+            @Override//直接在net中把文章转义
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Content content = JSON.parseObject(responseString, Content.class);
                 if (content != null && !TextUtils.isEmpty(content.getBody())) {
                     //万万没想到还有一手前端知识
-                    String css = "<link rel=\"stylesheet\" href=\"file:///android_assets/css.css\" type=\"text/css\">";
+                    String css = "<link rel=\"stylesheet\" href=\"file:///android_asset/css.css\" type=\"text/css\">";
                     String html = "<html><head>" + css + "</head><body>" + content.getBody() + "</body></html>";
                     html = html.replace("<div class=\"img-place-holder\">", "");
                     content.setBody(html);

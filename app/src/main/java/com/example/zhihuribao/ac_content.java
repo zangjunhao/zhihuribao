@@ -27,6 +27,8 @@ import com.example.zhihuribao.date.Content;
 public class ac_content extends AppCompatActivity {
     private Listener .accontentclick listener;
     private WebView webView;
+    private String linkCss;
+    private String html;
     private enum STATUS {ALREADY_LOAD, WAIT_RETRY, IN_LOAD}//枚举
     private STATUS status;
     private int id;
@@ -49,9 +51,9 @@ public class ac_content extends AppCompatActivity {
     private void init() {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//使用缓存的数据
-        webView.getSettings().setDomStorageEnabled(true);//本地储存
-        webView.getSettings().setDatabaseEnabled(true);//离线缓存
-        webView.getSettings().setAppCacheEnabled(true);//应用缓存
+        webView.getSettings().setDomStorageEnabled(true);//开启本地储存
+        webView.getSettings().setDatabaseEnabled(true);//开启离线缓存
+        webView.getSettings().setAppCacheEnabled(true);//开启应用缓存
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("窃格瓦拉赐予你力量");
         setSupportActionBar(toolbar);
@@ -71,7 +73,7 @@ public class ac_content extends AppCompatActivity {
             public void onSuccess(Content content) {
                 CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
                 mCollapsingToolbarLayout.setTitle(content.getBody());
-                webView.loadDataWithBaseURL("x-data://base", content.getBody(), "text/html", "UTF-8", null);
+                webView.loadDataWithBaseURL("file:///android_assets/", content.getBody(), "text/html", "UTF-8", null);
                 ImageView imageView = (ImageView) findViewById(R.id.headImage);
                 Constant.getImageLoader().displayImage(content.getImage(), imageView, Constant.getDisplayImageOptions());
                 stopAnimation(hintImage);
