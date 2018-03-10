@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }).show();
     }
-
     private FragmentTransaction getTransition() {
         FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
         transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);

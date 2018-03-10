@@ -68,6 +68,14 @@ public class mainfragment extends Basefragment {
                 }
             }
         };
+        Listener.slbuttom slideListener = new Listener.slbuttom() {
+            @Override
+            public void onSlideToTheBottom() {
+                getBeforeArticleList();
+            }
+        };
+        adapter.setSlideToTheBottomListener(slideListener);
+        getLatestArticleList();
     }
     public void getLatestArticleList() {
         if (!net.isNetworkConnected(mActivity)) {

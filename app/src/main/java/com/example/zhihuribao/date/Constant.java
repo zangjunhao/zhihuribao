@@ -12,7 +12,6 @@ public class Constant {
     public final static String acbeforeurl = "http://news.at.zhihu.com/api/4/news/before/";
     public final static String aclatesturl = "http://news-at.zhihu.com/api/4/news/latest";
     public final static String acthemeurl = "http://news-at.zhihu.com/api/4/themes";
-    public final static String themecontenturl = "http://news-at.zhihu.com/api/4/theme/";
     public static ImageLoader getImageLoader() {
         return ImageLoader.getInstance();
     }

@@ -26,10 +26,8 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         this.context = context;
         init();
     }
-    private final int TYPE_FOOTER = 2;
     private LayoutInflater inflater;
     private List <story>storyls;
-    private LayoutInflater layoutInflater;
     private Context context;
     public Listener.actpstoryclick loadTopArticleListener;
     private Listener.slbuttom slideListener;
@@ -112,7 +110,9 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public int getItemCount() {
         return storyls.size() + 1;
     }
-
+    public void setSlideToTheBottomListener(Listener.slbuttom slideListener) {
+        this.slideListener = slideListener;
+    }
    static class ArticleListTopHolder extends RecyclerView.ViewHolder {
         public banner banner;
         public ArticleListTopHolder (View itemView) {

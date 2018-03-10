@@ -126,6 +126,7 @@ public class banner extends FrameLayout {
         public void onPageScrolled(int arg0, float arg1, int arg2) {
         }
         @Override
+        //图片左右滑动时候，将当前页的圆点图片设为选中状态
         public void onPageSelected(int position) {
             currentItem = position;
             tpstory topStories = topStoriesList.get(position);

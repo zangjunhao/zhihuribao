@@ -100,7 +100,7 @@ public class net//完整的asynchttp框架的使用
                 Content content = JSON.parseObject(responseString, Content.class);
                 if (content != null && !TextUtils.isEmpty(content.getBody())) {
                     //万万没想到还有一手前端知识
-                    String css = "<link rel=\"stylesheet\" href=\"file:///android_assets/src.css\" type=\"text/css\">";
+                    String css = "<link rel=\"stylesheet\" href=\"file:///android_assets/css.css\" type=\"text/css\">";
                     String html = "<html><head>" + css + "</head><body>" + content.getBody() + "</body></html>";
                     html = html.replace("<div class=\"img-place-holder\">", "");
                     content.setBody(html);
@@ -112,7 +112,6 @@ public class net//完整的asynchttp框架的使用
                 if (listener != null) {
                     listener.onFailure();
                 }
-
             }
         });
     }
@@ -142,27 +141,5 @@ public class net//完整的asynchttp框架的使用
             }
         });
     }
-    public static void getArticleListByTheme(int id, final Listener.OnLoadThemeContentListener listener) {
-        client.get(Constant.themecontenturl + id, new TextHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                if (listener != null) {
-                    listener.onFailure();
-                }
-            }
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                actheme articleTheme = JSON.parseObject(responseString, actheme.class);
-                if (articleTheme != null && articleTheme.getStories() != null && articleTheme.getStories().size() > 0) {
-                    if (listener != null) {
-                        listener.onSuccess(articleTheme);
-                        return;
-                    }
-                }
-                if (listener != null) {
-                    listener.onFailure();
-                }
-            }
-        });
     }
-}
+
