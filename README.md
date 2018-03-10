@@ -1,2 +1,2 @@
-#红岩网校寒假作业——知乎日报
-##目前还有一个改了两天的bug没改完，等改完了在贴gif和完整README（我是真的垃圾）
+# 红岩寒假作业——知乎日报（致敬伟大的窃格瓦拉顾取名为窃格瓦拉日报）
+![image](https://github.com/Zhuzzzzzzx/MyZhihuDairy/raw/master/Zhihu.gif)
