@@ -76,7 +76,6 @@ public class Menufragment extends Basefragment{
         };
         net.getThemes(listener);
     }
-
     public class ArticleThemeListAdaptr extends BaseAdapter {
         private List<String> themeList;
         private Context context;

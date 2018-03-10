@@ -23,17 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 67698 on 2018/3/7.
+ * Created by 67698 on 2018/3/5.
  */
 
 public class content_adapeter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private actheme articleTheme;
     private List<story> storiesList;
     private LayoutInflater inflater;
     private Context context;
     private Listener.acitemclick clickListener;
-    private int TYPE_TOP = 0;
-    private int TYPE_ARTICLE = 1;
     public content_adapeter(Context context) {
         this.context = context;
         init();
@@ -49,21 +46,20 @@ public class content_adapeter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID", id);
                 intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
+                context.startActivity(intent);}
         };
     }
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
-            return TYPE_TOP;
+            return 0;
         }
-        return TYPE_ARTICLE;
+        return 1;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == TYPE_ARTICLE) {
+        if (viewType ==1) {
             view = inflater.inflate(R.layout.activity_main, parent, false);
             return new mHolder(view);
         } else {
@@ -71,7 +67,7 @@ public class content_adapeter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return new ThemeArticleTopHolder(view);
         }
     }
-
+    private actheme articleTheme;
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position == 0) {

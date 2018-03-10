@@ -27,11 +27,11 @@ import com.example.zhihuribao.date.Content;
 public class ac_content extends AppCompatActivity {
     private Listener .accontentclick listener;
     private WebView webView;
-    private ImageView hintImage;
-    private TextView hintText;
-    private enum STATUS {ALREADY_LOAD, WAIT_RETRY, IN_LOAD}
+    private enum STATUS {ALREADY_LOAD, WAIT_RETRY, IN_LOAD}//枚举
     private STATUS status;
     private int id;
+    private ImageView hintImage;
+    private TextView hintText;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,19 @@ public class ac_content extends AppCompatActivity {
         }
     }
     private void init() {
-        hintImage = (ImageView) findViewById(R.id.hintImage);
-        hintText = (TextView) findViewById(R.id.hintText);
         webView = (WebView) findViewById(R.id.webView);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setDatabaseEnabled(true);
-        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//使用缓存的数据
+        webView.getSettings().setDomStorageEnabled(true);//本地储存
+        webView.getSettings().setDatabaseEnabled(true);//离线缓存
+        webView.getSettings().setAppCacheEnabled(true);//应用缓存
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("窃格瓦拉赐予你力量");
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        hintImage = (ImageView) findViewById(R.id.hintImage);
+        hintText = (TextView) findViewById(R.id.hintText);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -91,7 +91,6 @@ public class ac_content extends AppCompatActivity {
                 } else {
                     snackbar = Snackbar.make(webView, "好像偷电动车出了一点问题", Snackbar.LENGTH_SHORT);
                 }
-                snackbar.getView().setBackgroundColor(Color.parseColor("#0088CC"));
                 snackbar.show();
             }
         };
