@@ -41,7 +41,7 @@ public  class readapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             @Override
             public void OnItemClickListener(int position) {
                 int id = storyls.get(position - 1).getId();
-                Intent intent = new Intent(context,ac_content.class);
+              final Intent intent = new Intent(context,ac_content.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID", id);
                 intent.putExtras(bundle);
