@@ -18,7 +18,7 @@ import com.example.zhihuribao.date.tpstory;
 import com.example.zhihuribao.net;
 public class mainfragment extends Basefragment {
     private RecyclerView recyclerView;
-    private readapter adapter;
+    private readapter rcadapter;
     private Listener.aclastclick latestListener;
     private Listener.acbeforeclick beforeListener;
     private boolean flag;
@@ -31,16 +31,16 @@ public class mainfragment extends Basefragment {
     }
     @Override
     protected void initData() {
-        adapter = new readapter(mActivity);
-        recyclerView.setAdapter(adapter);
+        rcadapter = new readapter(mActivity);
+        recyclerView.setAdapter(rcadapter);
         latestListener = new Listener.aclastclick() {
             @Override
             public void onSuccess(Lastat articleLatest) {
-                adapter.setData(articleLatest);
+                rcadapter.setData(articleLatest);
                 getRootActivity().setDate(articleLatest.getDate());
                 List<tpstory> topStoriesList = articleLatest.getTop_stories();
-                if (adapter.loadTopArticleListener != null) {
-                    adapter.loadTopArticleListener.onSuccess(topStoriesList);}
+                if (rcadapter.loadTopArticleListener != null) {
+                    rcadapter.loadTopArticleListener.onSuccess(topStoriesList);}
                 stopRefresh();
                 if (!flag) {flag = true;}
                 else
@@ -57,8 +57,8 @@ public class mainfragment extends Basefragment {
         beforeListener = new Listener.acbeforeclick() {
             @Override
             public void onSuccess(Beforeat articleBefore) {
-                adapter.addData(articleBefore.getStories());
-                adapter.notifyDataSetChanged();
+                rcadapter.addData(articleBefore.getStories());
+                rcadapter.notifyDataSetChanged();
                 getRootActivity().setDate(articleBefore.getDate());
             }
             @Override
@@ -74,7 +74,7 @@ public class mainfragment extends Basefragment {
                 getBeforeArticleList();
             }
         };
-        adapter.setSlideToTheBottomListener(slideListener);
+        rcadapter.setSlideToTheBottomListener(slideListener);
         getLatestArticleList();
     }
     public void getLatestArticleList() {

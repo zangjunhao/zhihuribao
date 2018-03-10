@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private SwipeRefreshLayout refreshLayout;
     private int number;
-    public boolean isHomepage;
+    public boolean zhuye;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         number = -1;
         getTransition().add(R.id.rongnafl, new mainfragment(), "Fragment" + number).commit();
-        isHomepage = true;
+        zhuye = true;
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//动画
     }
     private void initView() {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             transition.show(mainFragment).commit();
         }
         number = -1;
-        isHomepage = true;
+        zhuye = true;
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("接受窃格瓦拉的洗礼吧");
         }
@@ -91,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawerLayout();
         return;}
-        if (!isHomepage) {getHomepage();
+        if (!zhuye) {getHomepage();
         return;}
         if (isExit) {
             refreshLayout.setRefreshing(false);net.client.cancelAllRequests(true);//关闭所有请求super.onBackPressed()
         } else {
-            //多设置一次snackbar来提醒
+            //多设置一次snackbar来提醒退出
             Snackbar snackbar = Snackbar.make(refreshLayout, "意思你就楞个走了哦", Snackbar.LENGTH_SHORT);
             snackbar.setCallback(new Snackbar.Callback() {
                 @Override
